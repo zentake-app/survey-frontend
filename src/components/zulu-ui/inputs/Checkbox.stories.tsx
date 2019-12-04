@@ -9,7 +9,7 @@ const COLOR_OPTIONS: {[key: string]: ZuluColorNames} = {
   Secondary: 'secondary',
   Default: 'default',
 };
-export const button = () => {
+export const checkbox = () => {
   return (
     <ZuluCheckbox
       disabled={boolean('Disabled', false)}
@@ -23,6 +23,7 @@ export const button = () => {
 export const withLabel = () => {
   return (
     <ZuluCheckbox
+      disabled={boolean('Disabled', false)}
       checked={boolean('Is Checked', true)}
       onChange={({target: {checked}}) => console.log(checked)}
       label={text('Checkbox Label', 'Checkbox Label')}
