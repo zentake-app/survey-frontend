@@ -1,3 +1,5 @@
+class Survey {}
+class Question {}
 export class QuestionGroup {
   constructor(
     public createdAt: string,
