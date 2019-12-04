@@ -10,14 +10,12 @@ const VARIANT_OPTIONS: {[key: string]: ZuluLabelVariant} = {
   Outlined: 'outlined',
 };
 
-export const basic = () => (
+export const textField = () => (
   <ZuluTextField
     placeholder={boolean('Has Placeholder', true) ? 'Placeholder' : undefined}
     label={boolean('Has Label', true) ? 'Label' : undefined}
     value={boolean('Has Input Text', true) ? 'Input Text' : undefined}
-    
     helperText={boolean('Has Helper Text', true) ? 'Helpful Helper Text' : undefined}
     variant={select('Label Variant', VARIANT_OPTIONS, VARIANT_OPTIONS.Standard)}
-
   />
 );
