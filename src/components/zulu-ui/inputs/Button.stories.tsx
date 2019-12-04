@@ -2,10 +2,8 @@ import * as React from 'react';
 import {withKnobs, text, boolean, select} from '@storybook/addon-knobs';
 import {
   ZuluButton,
-  ZuluButtonProps,
   ZuluButtonVariant,
   ZuluButtonColor,
-  ZuluButtonSize
 } from './Button';
 
 export default {title: 'Button', decorators: [withKnobs]};

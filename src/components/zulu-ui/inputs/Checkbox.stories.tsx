@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {withKnobs, text, boolean, select} from '@storybook/addon-knobs';
-import {ZuluCheckbox, ZuluCheckboxProps} from './Checkbox';
+import {ZuluCheckbox} from './Checkbox';
 import {ZuluColorNames} from './Colors';
 export default {title: 'Checkbox', decorators: [withKnobs]};
 
@@ -15,7 +15,7 @@ export const button = () => {
       disabled={boolean('Disabled', false)}
       color={select('Button Color', COLOR_OPTIONS, COLOR_OPTIONS.Default)}
       checked={boolean('Is Checked', true)}
-      onChange={(e) => console.log(e.target && !!e.target.checked)}
+      onChange={e => console.log(e.target && !!e.target.checked)}
     />
   );
 };
@@ -27,6 +27,5 @@ export const withLabel = () => {
       onChange={({target: {checked}}) => console.log(checked)}
       label={text('Checkbox Label', 'Checkbox Label')}
     />
-  )
-}
-
+  );
+};

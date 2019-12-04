@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {withKnobs, text, boolean, select} from '@storybook/addon-knobs';
-import {ZuluDatePicker, ZuluDatepickerProps} from './Datepicker';
+import {withKnobs} from '@storybook/addon-knobs';
+import {ZuluDatePicker} from './Datepicker';
 import moment from 'moment';
 export default {title: 'Datepicker', decorators: [withKnobs]};
 
