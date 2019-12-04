@@ -2,7 +2,7 @@ import * as React from 'react';
 import {withKnobs, text, boolean, select} from '@storybook/addon-knobs';
 import {ZuluCheckbox} from './Checkbox';
 import {ZuluColorNames} from './Colors';
-export default {title: 'Checkbox', decorators: [withKnobs]};
+export default {title: 'Zentake Design Language|Atoms/Checkbox', decorators: [withKnobs]};
 
 const COLOR_OPTIONS: {[key: string]: ZuluColorNames} = {
   Primary: 'primary',

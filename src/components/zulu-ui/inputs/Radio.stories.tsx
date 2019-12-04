@@ -2,7 +2,7 @@ import * as React from 'react';
 import {withKnobs} from '@storybook/addon-knobs';
 import {ZuluRadio} from './Radio';
 
-export default {title: 'Radio', decorators: [withKnobs]};
+export default {title: 'Zentake Design Language|Atoms/Radio', decorators: [withKnobs]};
 
 export const radioGroup = () => (
   <ZuluRadio.Group value="a">
