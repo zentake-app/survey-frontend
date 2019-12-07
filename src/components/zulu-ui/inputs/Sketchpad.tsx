@@ -22,8 +22,10 @@ class Sketchpad extends React.Component<SketchpadProps, SketchpadState> {
     };
   }
 
-  handleMouseDown = (mouseEvent: React.MouseEvent<SVGSVGElement>) => {
-    if (mouseEvent.button != 0) {
+
+
+  handleMouseDown = (mouseEvent: React.MouseEvent<SVGSVGElement> | React.TouchEvent<SVGSVGElement>) => {
+    if ('button' in mouseEvent && mouseEvent.button != 0) {
       return;
     }
     const point = this.relativeCoordinatesForEvent(mouseEvent);
@@ -40,7 +42,7 @@ class Sketchpad extends React.Component<SketchpadProps, SketchpadState> {
   handleMouseUp = () => {
     this.setState({ isDrawing: false });
   };
-  handleMouseMove = (mouseEvent: React.MouseEvent<SVGSVGElement>) => {
+  handleMouseMove = (mouseEvent: React.MouseEvent<SVGSVGElement> | React.TouchEvent<SVGSVGElement>) => {
     if (!this.state.isDrawing) {
       return;
     }
@@ -62,16 +64,36 @@ class Sketchpad extends React.Component<SketchpadProps, SketchpadState> {
     });
   };
 
+  getXYForTouchOrClick = (event: React.TouchEvent<SVGSVGElement> | React.MouseEvent<SVGSVGElement>): Point | null => {
+    if ('touches' in event) {
+      const touchEvent = event as React.TouchEvent<SVGSVGElement>
+      if (touchEvent.touches.length > 0) {
+        return { x: touchEvent.touches[0].clientX, y: touchEvent.touches[0].clientY }
+      }
+    }
+    if ('clientX' in event && 'clientY' in event) {
+      const mouseEvent = event as React.MouseEvent<SVGSVGElement>
+      return { x: mouseEvent.clientX, y: mouseEvent.clientY }
+    }
+    return null
+  }
+
   relativeCoordinatesForEvent = (
-    mouseEvent: React.MouseEvent<SVGSVGElement>,
+    mouseEvent: React.MouseEvent<SVGSVGElement> | React.TouchEvent<SVGSVGElement>,
   ) => {
     if (!this.drawingArea || !this.drawingArea.current) {
       return;
     }
     const boundingRect = this.drawingArea.current.getBoundingClientRect();
+    const eventXY = this.getXYForTouchOrClick(mouseEvent)
+    if (
+      !eventXY
+    ) {
+      return null
+    }
     return Object.freeze({
-      x: mouseEvent.clientX - boundingRect.left,
-      y: mouseEvent.clientY - boundingRect.top,
+      x: eventXY.x - boundingRect.left,
+      y: eventXY.y - boundingRect.top,
     });
   };
   render() {
@@ -83,7 +105,9 @@ class Sketchpad extends React.Component<SketchpadProps, SketchpadState> {
         onMouseDown={this.handleMouseDown}
         onMouseMove={this.handleMouseMove}
         onMouseUp={this.handleMouseUp}
-
+        onTouchStart={this.handleMouseDown}
+        onTouchEnd={this.handleMouseUp}
+        onTouchMove={this.handleMouseMove}
       >
         {this.state.lines.map((line, index) => (
           <DrawingLine color={strokeColor} line={line} strokeWidth={strokeWidth} key={index} />
