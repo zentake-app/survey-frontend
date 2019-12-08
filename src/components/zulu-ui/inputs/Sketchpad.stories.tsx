@@ -16,7 +16,7 @@ export const sketchPad = () => (
       height: text('Image Height', '600px'),
     }}>
     <Sketchpad
-      style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0}}
+      style={{height: '100%', position: 'absolute', top: 0, left: 0, right: 0, bottom: 0}}
       strokeColor={color('Stroke Color', '#000000')}
       strokeWidth={number('Stroke Width', 3, {min: 0, max: 10, step: 1.0})}
     />
