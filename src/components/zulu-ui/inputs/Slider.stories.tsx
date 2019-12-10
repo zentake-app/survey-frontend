@@ -4,7 +4,7 @@ import {ZuluSlider, ShowLabelOptions} from './Slider';
 import {withKnobs, number, select, boolean} from '@storybook/addon-knobs';
 
 export default {
-  title: 'Zentake Design Language|Atoms/Slider',
+  title: 'Zentake Design Language|Atoms/inputs/Slider',
   decorators: [withKnobs],
 };
 

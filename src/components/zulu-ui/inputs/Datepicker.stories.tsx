@@ -2,7 +2,7 @@ import * as React from 'react';
 import {withKnobs} from '@storybook/addon-knobs';
 import {ZuluDatePicker} from './Datepicker';
 import moment from 'moment';
-export default {title: 'Zentake Design Language|Atoms/Datepicker', decorators: [withKnobs]};
+export default {title: 'Zentake Design Language|Atoms/inputs/Datepicker', decorators: [withKnobs]};
 
 export const datePicker = () => {
   return (

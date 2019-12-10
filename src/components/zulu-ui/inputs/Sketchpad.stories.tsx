@@ -3,7 +3,7 @@ import {withKnobs, color, number, text} from '@storybook/addon-knobs';
 import {Sketchpad} from './Sketchpad';
 
 export default {
-  title: 'Zentake Design Language|Atoms/Sketchpad',
+  title: 'Zentake Design Language|Atoms/inputs/Sketchpad',
   decorators: [withKnobs],
 };
 const DEFAULT_IMAGE_URL =

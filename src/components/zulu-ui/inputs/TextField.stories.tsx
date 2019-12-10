@@ -2,7 +2,7 @@ import * as React from 'react';
 import {withKnobs, select, boolean} from '@storybook/addon-knobs';
 import {ZuluTextField, ZuluLabelVariant} from './TextField';
 
-export default {title: 'Zentake Design Language|Atoms/Text Field', decorators: [withKnobs]};
+export default {title: 'Zentake Design Language|Atoms/inputs/Text Field', decorators: [withKnobs]};
 
 const VARIANT_OPTIONS: {[key: string]: ZuluLabelVariant} = {
   Standard: 'standard',

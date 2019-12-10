@@ -6,7 +6,7 @@ import {
   ZuluButtonColor,
 } from './Button';
 
-export default {title: 'Zentake Design Language|Atoms/Button', decorators: [withKnobs]};
+export default {title: 'Zentake Design Language|Atoms/inputs/Button', decorators: [withKnobs]};
 
 const VARIANT_OPTIONS: {[key: string]: ZuluButtonVariant} = {
   Outlined: 'outlined',
