@@ -4,10 +4,12 @@ export type Point = {x: number; y: number};
 
 export interface SketchpadProps {
   strokeColor: string;
+  backgroundImage: string;
   strokeWidth: number;
   style?: React.CSSProperties;
 }
 interface SketchpadState {
+  backgroundImageDataUri?: string;
   lines: Point[][];
   isDrawing: boolean;
 }
@@ -26,9 +28,8 @@ class Sketchpad extends React.Component<SketchpadProps, SketchpadState> {
       | React.MouseEvent<SVGSVGElement>
       | React.TouchEvent<SVGSVGElement>,
   ) => {
-    mouseEvent.preventDefault()
+    mouseEvent.preventDefault();
     if ('button' in mouseEvent && mouseEvent.button != 0) {
-
       return;
     }
     const point = this.relativeCoordinatesForEvent(mouseEvent);
@@ -50,7 +51,7 @@ class Sketchpad extends React.Component<SketchpadProps, SketchpadState> {
       | React.MouseEvent<SVGSVGElement>
       | React.TouchEvent<SVGSVGElement>,
   ) => {
-    mouseEvent.preventDefault()
+    mouseEvent.preventDefault();
     if (!this.state.isDrawing) {
       return;
     }
@@ -91,6 +92,12 @@ class Sketchpad extends React.Component<SketchpadProps, SketchpadState> {
     return null;
   };
 
+  getDrawingArea = () => {
+    if (!this.drawingArea) {
+      return null;
+    }
+  };
+
   relativeCoordinatesForEvent = (
     mouseEvent:
       | React.MouseEvent<SVGSVGElement>
@@ -109,11 +116,65 @@ class Sketchpad extends React.Component<SketchpadProps, SketchpadState> {
       y: eventXY.y - boundingRect.top,
     });
   };
+  private getDataUriForImage = (imageSource: string) => {
+    return new Promise(resolve => {
+      const DOMURL = window.URL || window.webkitURL || window;
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      const image = new Image();
+      image.onload = () => {
+        ctx.drawImage(image, 0, 0);
+        'revokeObjectURL' in DOMURL && DOMURL.revokeObjectURL(imageSource);
+        const imgURI = canvas
+          .toDataURL('image/png')
+          .replace('image/png', 'image/octet-stream');
+        resolve(imgURI as string);
+      };
+      image.src = imageSource;
+    });
+  };
+  private fetchImageAsDataUrl = async (imageSource: string) => {
+    if (!imageSource) {
+      return null;
+    }
+    return await fetch(this.props.backgroundImage)
+      .then(r => r.blob())
+      .then(
+        blob =>
+          new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(blob);
+          }),
+      );
+  };
+  componentDidMount() {
+    this.fetchImageAsDataUrl(this.props.backgroundImage).then(uri => {
+      this.setState({
+        backgroundImageDataUri: uri as string,
+      });
+    });
+  }
+  public getImageFromSVG = async () => {
+    const data = new XMLSerializer().serializeToString(
+      this.drawingArea.current,
+    );
+    const DOMURL = window.URL || window.webkitURL || window;
+    const svgBlob = new Blob([data], {type: 'image/svg+xml;charset=utf-8'});
+    const url = 'createObjectURL' in DOMURL && DOMURL.createObjectURL(svgBlob);
+
+    return await this.getDataUriForImage(url);
+  };
   render() {
     const {strokeColor = 'black', strokeWidth = 3} = this.props;
     return (
       <svg
-        style={{touchAction: 'none', ...(this.props.style || {})}}
+        style={{
+          touchAction: 'none',
+          ...(this.props.style || {}),
+          height: '100%',
+        }}
         ref={this.drawingArea}
         onMouseDown={this.handleMouseDown}
         onMouseMove={this.handleMouseMove}
@@ -121,6 +182,12 @@ class Sketchpad extends React.Component<SketchpadProps, SketchpadState> {
         onTouchStart={this.handleMouseDown}
         onTouchEnd={this.handleMouseUp}
         onTouchMove={this.handleMouseMove}>
+        {this.state.backgroundImageDataUri && (
+          <image
+            href={this.state.backgroundImageDataUri}
+            height="100%"
+            width="100%"></image>
+        )}
         {this.state.lines.map((line, index) => (
           <DrawingLine
             color={strokeColor}
@@ -133,31 +200,6 @@ class Sketchpad extends React.Component<SketchpadProps, SketchpadState> {
     );
   }
 }
-
-const Drawing = ({
-  lines,
-  strokeColor,
-  strokeWidth,
-  children,
-}: {
-  lines: Point[][];
-  strokeColor: string;
-  strokeWidth: number;
-  children: React.ReactNode;
-}) => {
-  return (
-    <svg>
-      {lines.map((line, index) => (
-        <DrawingLine
-          color={strokeColor}
-          line={line}
-          strokeWidth={strokeWidth}
-          key={index}
-        />
-      ))}
-    </svg>
-  );
-};
 
 const DrawingLine = ({
   line,
