@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
-import colors from "@material-ui/core/colors";
+import * as colors from "@material-ui/core/colors";
 import Button from "@material-ui/core/Button";
 import ListItem from "@material-ui/core/ListItem";
 
