@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {withKnobs, select} from '@storybook/addon-knobs';
 import {ZuluThemeProvider, theme} from './ThemeProvider';
-import {ZuluButton} from './Button';
+import {ZuluButton} from '../components/inputs/Button';
 import {Theme} from '@material-ui/core';
 import * as Colors from '@material-ui/core/colors';
 export default {
