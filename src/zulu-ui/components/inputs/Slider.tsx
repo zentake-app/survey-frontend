@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Slider} from '@material-ui/core';
+import Slider from '@material-ui/core/Slider';
 
 export type Mark = {value: number; label: React.ReactNode};
 

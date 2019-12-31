@@ -1,7 +1,7 @@
-import * as React from 'react';
-import {TextField} from '@material-ui/core';
+import * as React from "react";
+import TextField from "@material-ui/core/TextField";
 
-export type ZuluLabelVariant =  'filled' | 'outlined' | 'standard';
+export type ZuluLabelVariant = "filled" | "outlined" | "standard";
 export interface ZuluTextFieldProps {
   placeholder?: string;
   label?: string;
@@ -11,11 +11,11 @@ export interface ZuluTextFieldProps {
 }
 
 export function ZuluTextField({
-  placeholder = '',
-  label = '',
-  value = '',
-  helperText = '',
-  variant = 'standard',
+  placeholder = "",
+  label = "",
+  value = "",
+  helperText = "",
+  variant = "standard",
   ...props
 }: ZuluTextFieldProps) {
   return (
@@ -25,6 +25,7 @@ export function ZuluTextField({
       value={value}
       variant={variant as any}
       helperText={helperText}
-      {...props}></TextField>
+      {...props}
+    ></TextField>
   );
 }

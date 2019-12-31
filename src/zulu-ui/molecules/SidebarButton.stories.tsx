@@ -1,7 +1,8 @@
 import * as React from "react";
 import { withKnobs, text } from "@storybook/addon-knobs";
 import { ZuluSidebarButton } from "./SidebarButton";
-import { AcUnit } from "@material-ui/icons";
+import AcUnit from "@material-ui/icons/AcUnit";
+
 export default {
   title: "Zentake Design Language|Molecules/Sidebar",
   decorators: [withKnobs]

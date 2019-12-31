@@ -1,7 +1,9 @@
 import * as React from "react";
 import { withKnobs, text } from "@storybook/addon-knobs";
 import { ZuluSidebar, ZuluNavigationItem } from "./Sidebar";
-import { AcUnit, AccessAlarm, LiveHelp } from "@material-ui/icons";
+import AcUnit from "@material-ui/icons/AcUnit";
+import AccessAlarm from "@material-ui/icons/AccessAlarm"
+import LiveHelp from "@material-ui/icons/LiveHelp"
 export default {
   title: "Zentake Design Language|Organisms/Sidebar",
   decorators: [withKnobs]
