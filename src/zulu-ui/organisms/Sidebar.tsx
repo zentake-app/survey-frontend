@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) => {
   });
 });
 
-const ZuluSidebar = ({ navigationItems }: ZuluSidebarProps) => {
+const ZuluSidebar = ({ navigationItems = [] }: ZuluSidebarProps) => {
   const classes = useStyles();
   return (
     <Drawer

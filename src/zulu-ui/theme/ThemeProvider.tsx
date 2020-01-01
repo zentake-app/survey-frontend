@@ -1,7 +1,6 @@
 import * as React from "react";
 import { ThemeProvider } from "@material-ui/core";
-import { createMuiTheme, Theme } from "@material-ui/core/styles";
-import * as Colors from "@material-ui/core/colors";
+import { Theme } from "@material-ui/core/styles";
 import theme from "./";
 
 interface ZuluThemeProviderProps {
