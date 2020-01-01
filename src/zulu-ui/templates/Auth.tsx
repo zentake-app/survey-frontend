@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
-import { AppBar } from "@material-ui/core";
+import { ZuluAppBar } from "../components/surfaces/AppBar";
+import { AppBarBrandImage } from "../../components/AppBarBrandImage";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -22,7 +23,7 @@ const ZuluAuthTemplate = ({ children }: ZuluAuthTemplateProps) => {
 
   return (
     <div className={classes.root}>
-      <AppBar />
+      <ZuluAppBar leading={<AppBarBrandImage />} />
       <main className={classes.content}>{children}</main>
     </div>
   );

@@ -9,6 +9,7 @@ import {
   Theme
 } from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import { RouteComponentProps } from "react-router";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -97,9 +98,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   signInButton: {
     margin: theme.spacing(2, 0)
   },
+  person: {}
 }));
 
-const SignIn = ({ history }: {} & RouteComponentProps) => {
+const SignIn = ({ history }: {} & Partial<RouteComponentProps>) => {
   const classes = useStyles();
   const [formState, setFormState] = useState({
     isValid: false,
@@ -119,7 +121,7 @@ const SignIn = ({ history }: {} & RouteComponentProps) => {
   }, [formState.values]);
 
   const handleBack = () => {
-    history.goBack();
+    history && history.goBack();
   };
 
   const handleChange = (event: any) => {
@@ -143,7 +145,7 @@ const SignIn = ({ history }: {} & RouteComponentProps) => {
 
   const handleSignIn = (event: FormEvent) => {
     event.preventDefault();
-    history.push("/");
+    history && history.push("/");
   };
 
   return (

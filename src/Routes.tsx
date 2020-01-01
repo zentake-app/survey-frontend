@@ -2,6 +2,7 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import { RouteWithLayout } from "./components/RouteWithLayout";
 import { MainTemplate } from "./zulu-ui/templates/Main";
+import { Dashboard } from "./routes/Dashboard";
 
 const Routes = () => {
   return (
@@ -9,7 +10,7 @@ const Routes = () => {
       <RouteWithLayout
         path="/"
         layout={MainTemplate}
-        component={() => <div />}
+        component={Dashboard}
         exact
       />
     </Switch>

@@ -1,13 +1,16 @@
 import * as React from "react";
 import { withKnobs } from "@storybook/addon-knobs";
 import { SignIn } from "./SignIn";
-import { withRouter } from "react-router";
+import { ZuluAuthTemplate } from "../zulu-ui/templates/Auth";
 export default {
   title: "Zentake Design Language|Pages/Sign In Page",
   decorators: [withKnobs]
 };
 
-
 export const main = () => {
-  return <SignIn />;
+  return (
+    <ZuluAuthTemplate>
+      <SignIn />
+    </ZuluAuthTemplate>
+  );
 };

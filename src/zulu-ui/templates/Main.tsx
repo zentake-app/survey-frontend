@@ -4,6 +4,7 @@ import { ZuluAppBar } from "../components/surfaces/AppBar";
 import { ZuluSidebar, ZuluNavigationItem } from "../organisms/Sidebar";
 import { ZuluMainFooter } from "../organisms/Footer";
 import clsx from "clsx";
+import { AppBarBrandImage } from "../../components/AppBarBrandImage";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,9 +24,17 @@ const useStyles = makeStyles(theme => ({
 
 interface MainTemplateProps {
   navigationItems: ZuluNavigationItem[];
+  title?: string;
+  brandImageSource?: string;
+  children: React.ReactNode;
 }
 
-const MainTemplate = ({ navigationItems }: MainTemplateProps) => {
+const MainTemplate = ({
+  navigationItems,
+  children,
+  title,
+  brandImageSource
+}: MainTemplateProps) => {
   const classes = useStyles();
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("lg"), {
@@ -40,9 +49,13 @@ const MainTemplate = ({ navigationItems }: MainTemplateProps) => {
         [classes.shiftContent]: isDesktop
       })}
     >
-      <ZuluAppBar />
+      <ZuluAppBar
+        pageTitle={title}
+        leading={<AppBarBrandImage source={brandImageSource} />}
+      />
       <ZuluSidebar navigationItems={navigationItems} />
       <main className={classes.content}>
+        {children}
         <ZuluMainFooter />
       </main>
     </div>
