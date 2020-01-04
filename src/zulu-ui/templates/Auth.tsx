@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
-import { ZuluAppBar } from "../components/surfaces/AppBar";
+import { ZuluAppBar } from "../molecules/surfaces/AppBar";
 import { AppBarBrandImage } from "../../components/AppBarBrandImage";
 
 const useStyles = makeStyles(() => ({

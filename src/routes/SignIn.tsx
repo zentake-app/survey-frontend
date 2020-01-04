@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Grid, Button, Typography, Theme } from "@material-ui/core";
 import { RouteComponentProps } from "react-router";
-import { ZuluTextField } from "../zulu-ui/components/inputs/TextField";
+import { ZuluTextField } from "../zulu-ui/atoms/inputs/TextField";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
