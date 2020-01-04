@@ -1,8 +1,10 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch } from "react-router-dom";
 import { RouteWithLayout } from "./components/RouteWithLayout";
 import { MainTemplate } from "./zulu-ui/templates/Main";
 import { Dashboard } from "./routes/Dashboard";
+import { ZuluAuthTemplate } from "./zulu-ui/templates/Auth";
+import { SignIn } from "./routes/SignIn";
 
 const Routes = () => {
   return (
@@ -11,6 +13,12 @@ const Routes = () => {
         path="/"
         layout={MainTemplate}
         component={Dashboard}
+        exact
+      />
+      <RouteWithLayout
+        path="/login"
+        layout={ZuluAuthTemplate}
+        component={SignIn}
         exact
       />
     </Switch>

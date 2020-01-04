@@ -8,6 +8,11 @@ export interface ZuluTextFieldProps {
   value?: string;
   variant?: ZuluLabelVariant;
   helperText?: string;
+  className?: string;
+  fullWidth?: boolean;
+  name?: string;
+  type?: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export function ZuluTextField({

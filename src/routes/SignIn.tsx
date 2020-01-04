@@ -1,15 +1,8 @@
-import React, { useState, useEffect, FormEvent } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/styles";
-import {
-  Grid,
-  Button,
-  IconButton,
-  TextField,
-  Typography,
-  Theme
-} from "@material-ui/core";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import { Grid, Button, Typography, Theme } from "@material-ui/core";
 import { RouteComponentProps } from "react-router";
+import { ZuluTextField } from "../zulu-ui/components/inputs/TextField";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -18,28 +11,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   grid: {
     height: "100%"
-  },
-  quoteContainer: {
-    [theme.breakpoints.down("md")]: {
-      display: "none"
-    }
-  },
-  quote: {
-    height: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundImage: "url(/images/auth.jpg)",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center"
-  },
-  quoteInner: {
-    textAlign: "center",
-    flexBasis: "600px"
-  },
-  quoteText: {
-    fontWeight: 300
   },
   name: {
     marginTop: theme.spacing(3)
@@ -83,12 +54,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   title: {
     marginTop: theme.spacing(3)
   },
-  socialButtons: {
-    marginTop: theme.spacing(3)
-  },
-  socialIcon: {
-    marginRight: theme.spacing(1)
-  },
   sugestion: {
     marginTop: theme.spacing(2)
   },
@@ -110,20 +75,6 @@ const SignIn = ({ history }: {} & Partial<RouteComponentProps>) => {
     errors: {}
   });
 
-  useEffect(() => {
-    const errors = null;
-
-    setFormState(formState => ({
-      ...formState,
-      isValid: errors ? false : true,
-      errors: errors || {}
-    }));
-  }, [formState.values]);
-
-  const handleBack = () => {
-    history && history.goBack();
-  };
-
   const handleChange = (event: any) => {
     event.persist();
 
@@ -142,55 +93,19 @@ const SignIn = ({ history }: {} & Partial<RouteComponentProps>) => {
       }
     }));
   };
-
-  const handleSignIn = (event: FormEvent) => {
-    event.preventDefault();
-    history && history.push("/");
-  };
+  const handleSignIn = () => {};
 
   return (
     <div className={classes.root}>
       <Grid className={classes.grid} container>
-        <Grid className={classes.quoteContainer} item lg={5}>
-          <div className={classes.quote}>
-            <div className={classes.quoteInner}>
-              <Typography className={classes.quoteText} variant="h1">
-                Hella narwhal Cosby sweater McSweeney's, salvia kitsch before
-                they sold out High Life.
-              </Typography>
-              <div className={classes.person}>
-                <Typography className={classes.name} variant="body1">
-                  Takamaru Ayako
-                </Typography>
-                <Typography className={classes.bio} variant="body2">
-                  Manager at inVision
-                </Typography>
-              </div>
-            </div>
-          </div>
-        </Grid>
-        <Grid className={classes.content} item lg={7} xs={12}>
+        <Grid className={classes.content} item>
           <div className={classes.content}>
-            <div className={classes.contentHeader}>
-              <IconButton onClick={handleBack}>
-                <ArrowBackIcon />
-              </IconButton>
-            </div>
             <div className={classes.contentBody}>
               <form className={classes.form} onSubmit={handleSignIn}>
                 <Typography className={classes.title} variant="h2">
                   Sign in
                 </Typography>
-
-                <Typography
-                  align="center"
-                  className={classes.sugestion}
-                  color="textSecondary"
-                  variant="body1"
-                >
-                  or login with email address
-                </Typography>
-                <TextField
+                <ZuluTextField
                   className={classes.textField}
                   fullWidth
                   label="Email address"
@@ -198,8 +113,9 @@ const SignIn = ({ history }: {} & Partial<RouteComponentProps>) => {
                   onChange={handleChange}
                   type="text"
                   variant="outlined"
+                  value={(formState.values as any)["email"]}
                 />
-                <TextField
+                <ZuluTextField
                   className={classes.textField}
                   fullWidth
                   label="Password"
@@ -207,6 +123,7 @@ const SignIn = ({ history }: {} & Partial<RouteComponentProps>) => {
                   onChange={handleChange}
                   type="password"
                   variant="outlined"
+                  value={(formState.values as any)["password"]}
                 />
                 <Button
                   className={classes.signInButton}
@@ -217,7 +134,7 @@ const SignIn = ({ history }: {} & Partial<RouteComponentProps>) => {
                   type="submit"
                   variant="contained"
                 >
-                  Sign in now
+                  Sign in
                 </Button>
               </form>
             </div>

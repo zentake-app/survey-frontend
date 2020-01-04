@@ -6,9 +6,9 @@ import navigationItems from "./common/navigationItems";
 
 export interface DashboardProps extends Partial<RouteComponentProps> {}
 
-const Dashboard = ({}: DashboardProps) => {
+const Dashboard = (args: DashboardProps) => {
   return (
-    <MainTemplate title="Dashboard" navigationItems={navigationItems}>
+    <MainTemplate title="Dashboard" navigationItems={navigationItems} {...args}>
       <div />
     </MainTemplate>
   );

@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
 import { ZuluAppBar } from "../components/surfaces/AppBar";
 import { AppBarBrandImage } from "../../components/AppBarBrandImage";

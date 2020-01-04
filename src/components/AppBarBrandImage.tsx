@@ -10,6 +10,7 @@ const AppBarBrandImage = ({ source = BrandImage }: AppBarBrandImageProps) => {
   console.log(source);
   return (
     <img
+      alt="Zentake Logo"
       style={{
         maxHeight: "50px",
         marginRight: "1rem",

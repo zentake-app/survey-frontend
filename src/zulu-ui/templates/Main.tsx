@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles, useMediaQuery, useTheme } from "@material-ui/core";
 import { ZuluAppBar } from "../components/surfaces/AppBar";
 import { ZuluSidebar, ZuluNavigationItem } from "../organisms/Sidebar";
@@ -40,7 +40,7 @@ const MainTemplate = ({
   const isDesktop = useMediaQuery(theme.breakpoints.up("lg"), {
     defaultMatches: true
   });
-  const [openSidebar, setOpenSidebar] = useState(false);
+  // const [openSidebar, setOpenSidebar] = useState(false);
 
   return (
     <div
