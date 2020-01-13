@@ -7,7 +7,6 @@ interface AppBarBrandImageProps {
 }
 
 const AppBarBrandImage = ({ source = BrandImage }: AppBarBrandImageProps) => {
-  console.log(source);
   return (
     <img
       alt="Zentake Logo"

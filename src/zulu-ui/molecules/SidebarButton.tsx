@@ -3,6 +3,7 @@ import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import * as colors from "@material-ui/core/colors";
 import Button from "@material-ui/core/Button";
 import ListItem from "@material-ui/core/ListItem";
+import { Link } from "react-router-dom";
 
 export interface ZuluSidebarButtonProps {
   text: string;
@@ -44,11 +45,11 @@ const useStyles = makeStyles((theme: Theme) => {
   });
 });
 
-const ZuluSidebarButton = ({ text, icon }: ZuluSidebarButtonProps) => {
+const ZuluSidebarButton = ({ text, icon, to }: ZuluSidebarButtonProps) => {
   const classes = useStyles();
   return (
     <ListItem className={classes.item}>
-      <Button className={classes.button}>
+      <Button component={Link} to={to} className={classes.button}>
         <div className={classes.icon}>{icon}</div>
         {text}
       </Button>

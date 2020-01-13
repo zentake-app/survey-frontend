@@ -29,7 +29,7 @@ const navigationItems: ZuluNavigationItem[] = [
   {
     icon: <PowerSettingsNew />,
     label: "Log Out",
-    value: "/logout"
+    value: "/logout",
   }
 ];
 
