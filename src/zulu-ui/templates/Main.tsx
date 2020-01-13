@@ -54,10 +54,7 @@ const MainTemplate = ({
         leading={<AppBarBrandImage source={brandImageSource} />}
       />
       <ZuluSidebar navigationItems={navigationItems} />
-      <main className={classes.content}>
-        {children}
-        <ZuluMainFooter />
-      </main>
+      <main className={classes.content}>{children}</main>
     </div>
   );
 };

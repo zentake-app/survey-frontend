@@ -1,5 +1,7 @@
-import { configure, addDecorator } from '@storybook/react'
-import themeDecorator from './themeDecorator'
+import { configure, addDecorator } from "@storybook/react";
+import themeDecorator from "./themeDecorator";
+import apolloDecorator from "./apolloDecorator";
 
-addDecorator(themeDecorator)
-configure(require.context('../src', true, /\.stories.tsx$/), module)
+addDecorator(themeDecorator);
+addDecorator(apolloDecorator);
+configure(require.context("../src", true, /\.stories.tsx$/), module);
