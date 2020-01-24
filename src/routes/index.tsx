@@ -1,15 +1,17 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import { RouteWithLayout } from "./components/RouteWithLayout";
-import { MainTemplate } from "./zulu-ui/templates/Main";
-import { Dashboard } from "./routes/Dashboard";
-import { ZuluAuthTemplate } from "./zulu-ui/templates/Auth";
-import { SignIn } from "./routes/SignIn";
-import { ProtectedContent as protectedContent } from "./components/ProtectedContent";
-import { TokenProcessor } from "./components/TokenProcessor";
-import { AuthenticationContext } from "./providers/authenticationProvider";
-import { AuthenticationAPI } from "./repositories/authentication";
-import { Logout } from "./components/Logout";
+import { RouteWithLayout } from "../components/RouteWithLayout";
+import { MainTemplate } from "../zulu-ui/templates/Main";
+import { Dashboard } from "./Dashboard";
+import { ZuluAuthTemplate } from "../zulu-ui/templates/Auth";
+import { SignIn } from "./SignIn";
+import { ProtectedContent as protectedContent } from "../components/ProtectedContent";
+import { TokenProcessor } from "../components/TokenProcessor";
+import { AuthenticationContext } from "../providers/authenticationProvider";
+import { AuthenticationAPI } from "../repositories/authentication";
+import { Logout } from "../components/Logout";
+import { UnauthenticatedTemplate } from "../zulu-ui/templates/Unauthenticated";
+import { SurveyResponse } from "./SurveyResponse";
 
 const Routes = () => {
   const authenticationApi = new AuthenticationAPI();
@@ -39,6 +41,12 @@ const Routes = () => {
           path="/login"
           layout={protectedContent(ZuluAuthTemplate)}
           component={SignIn}
+          exact
+        />
+        <RouteWithLayout
+          layout={UnauthenticatedTemplate}
+          path="/surveys/respond/:surveyId"
+          component={SurveyResponse}
           exact
         />
       </Switch>

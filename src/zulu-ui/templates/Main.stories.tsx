@@ -1,7 +1,7 @@
 import * as React from "react";
 import { withKnobs } from "@storybook/addon-knobs";
 import { MainTemplate } from "./Main";
-import navigationItems from "../../routes/common/navigationItems";
+import NavigationItems from "../../routes/common/NavigationItems";
 import BrandImage from "../../assets/images/brandImage.png";
 
 export default {
@@ -13,7 +13,7 @@ export const main = () => {
   return (
     <MainTemplate
       title="Lorem Ipsum"
-      navigationItems={navigationItems}
+      navigationItems={NavigationItems.forUser({})}
       brandImageSource={BrandImage}
     >
       <div />
