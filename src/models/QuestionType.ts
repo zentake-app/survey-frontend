@@ -22,3 +22,6 @@ export const QUESTION_SUBTYPES = {
   time: "time",
   verticalList: "vertical_list"
 };
+
+export type QuestionType = keyof typeof QUESTION_TYPES;
+export type QuestionSubtype = keyof typeof QUESTION_SUBTYPES;
