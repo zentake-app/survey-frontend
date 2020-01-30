@@ -14,9 +14,9 @@ export interface ResponseStrategyArgs {
   validationStrategies?: Array<ValidationStrategy>;
 }
 
-export abstract class ResponseStrategy {
+export abstract class ResponseStrategy<T> {
   public validationStrategies: Array<ValidationStrategy> | undefined;
-
+  public abstract responseStrategyName: string;
   public validate(): Array<ValidationError> | null {
     return (
       this.validationStrategies?.reduce<Array<ValidationError>>(
@@ -30,20 +30,38 @@ export abstract class ResponseStrategy {
       ) || null
     );
   }
-  public abstract response: any | null;
+  public abstract response: T | null;
   constructor(args: ResponseStrategyArgs) {
     this.validationStrategies = args.validationStrategies || [];
   }
 }
 
-export class FiniteResponseStrategy extends ResponseStrategy {
-  public response: number | string | null = null;
+export type MultipleChoiceOption = {
+  value: number | string;
+};
+
+export class MultipleChoiceStrategy extends ResponseStrategy<
+  MultipleChoiceOption
+> {
+  responseStrategyName = "multiple_choice";
+  public responseOptions: MultipleChoiceOption[] = [];
+  public response = null;
+  constructor(
+    responseOptions: MultipleChoiceOption[],
+    args: ResponseStrategyArgs
+  ) {
+    super(args);
+    console.warn("response options", responseOptions);
+    this.responseOptions = responseOptions;
+  }
 }
 
-export class RangeResponseStrategy extends ResponseStrategy {
-  public response: number | null = null;
+export class RangeResponseStrategy extends ResponseStrategy<number> {
+  public response = null;
+  responseStrategyName = "range";
 }
 
-export class OpenTextResponseStrategy extends ResponseStrategy {
-  public response: string | null = null;
+export class OpenTextResponseStrategy extends ResponseStrategy<number> {
+  responseStrategyName = "open_text";
+  public response = null;
 }

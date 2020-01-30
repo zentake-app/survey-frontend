@@ -1,63 +1,33 @@
-import {
-  ResponseStrategy,
-  ValidationStrategy,
-  FiniteResponseStrategy
-} from "./QuestionValidator";
+import faker from "faker";
 
-import {
-  QuestionType,
-  QuestionSubtype
-} from "./QuestionType";
+import { ResponseStrategy, MultipleChoiceStrategy } from "./QuestionValidator";
 
-export type QuestionArgs = {
+import { QuestionType, QuestionSubtype } from "./QuestionType";
+
+export type QuestionArgs<T> = {
+  responseStrategy: ResponseStrategy<T>;
   questionText: string;
-  questionSubtype: QuestionSubtype;
-  validators?: Array<ValidationStrategy>;
 };
 
-export abstract class Question {
-  public abstract responseStrategy: ResponseStrategy | undefined;
-  public abstract questionText: string = "";
-  public abstract getResponse(): any;
-  public abstract questionType: QuestionType;
-  public abstract questionSubtype: QuestionSubtype;
-  public static fromRandom = () =>
-    QuestionBuilder("multipleChoice", "horizontalList");
-}
-
-function QuestionBuilder(
-  questionType: QuestionType,
-  questionSubtype: QuestionSubtype
-): Question {
-  switch (questionType) {
-    case (questionType = "multipleChoice"):
-      return new MultipleChoiceQuestion({
-        questionText: "Hey there, delilah",
-        questionSubtype: questionSubtype
-      });
-    default:
-      return new MultipleChoiceQuestion({
-        questionText: "Hey there, steve",
-        questionSubtype: "verticalList"
-      });
+export class Question<T> {
+  public responseStrategy: ResponseStrategy<T>;
+  public questionText: string = "";
+  public get response(): T | null {
+    return this.responseStrategy?.response || null;
   }
-}
-
-export class MultipleChoiceQuestion extends Question {
-  public questionText: string;
-  public questionType: QuestionType = "multipleChoice";
-  public questionSubtype: QuestionSubtype;
-  private validationStrategies: Array<ValidationStrategy>;
-  public responseStrategy = new FiniteResponseStrategy({
-    validationStrategies: this.validationStrategies
-  });
-  constructor(args: QuestionArgs) {
-    super();
+  public static fromRandom = (
+    type: QuestionType = "multipleChoice",
+    subType: QuestionSubtype = "horizontalList"
+  ) =>
+    new Question({
+      questionText: faker.lorem.sentence().replace(".", "?"),
+      responseStrategy: new MultipleChoiceStrategy(
+        new Array(4).fill(null).map(_ => ({ value: faker.lorem.words(3) })),
+        {}
+      )
+    });
+  constructor(args: QuestionArgs<T>) {
     this.questionText = args.questionText;
-    this.validationStrategies = args.validators || [];
-    this.questionSubtype = args.questionSubtype;
-  }
-  public getResponse() {
-    return this.responseStrategy.response;
+    this.responseStrategy = args.responseStrategy;
   }
 }

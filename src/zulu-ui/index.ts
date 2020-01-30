@@ -1,21 +1,20 @@
-import { Question } from "../models/Question";
 import { Component } from "react";
+import { ResponseStrategy } from "../models/QuestionValidator";
 
 interface QuestionBuilderProps {
-  question: Question;
+  responseStrategy: ResponseStrategy<any>;
+}
+interface ZuluQuestionProps {
+  responseStrategy: ResponseStrategy<any>;
 }
 
-export class ZuluQuestion extends Component {
-  public question: Question;
-  constructor(question: Question, props: any) {
-    super(props);
-    this.question = question;
-  }
+export interface ZuluResponseField {
+  responseStrategy: ResponseStrategy<any>;
 }
 
-class QuestionBuilder {
-  public question: Question;
+class ResponseFieldBuilder {
+  protected responseStrategy: ResponseStrategy<any>;
   constructor(props: QuestionBuilderProps) {
-    this.question = props.question;
+    this.responseStrategy = props.responseStrategy;
   }
 }
