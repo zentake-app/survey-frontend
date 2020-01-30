@@ -1,6 +1,7 @@
 import faker from "faker";
 
-import { ResponseStrategy, MultipleChoiceStrategy } from "./QuestionValidator";
+import { ResponseStrategy } from "./ResponseStrategy";
+import { MultipleChoiceStrategy } from "./ResponseStrategy/MultipleChoice";
 
 import { QuestionType, QuestionSubtype } from "./QuestionType";
 

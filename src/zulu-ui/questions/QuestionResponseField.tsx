@@ -1,9 +1,8 @@
 import React from "react";
-import {
-  ResponseStrategy,
-  MultipleChoiceStrategy
-} from "../../models/QuestionValidator";
+import { MultipleChoiceStrategy } from "../../models/ResponseStrategy/MultipleChoice";
+
 import MultipleChoiceResponse from "./MultipleChoice";
+import { ResponseStrategy } from "../../models/ResponseStrategy";
 
 interface IQuestionResponseFieldProps {
   responseStrategy: ResponseStrategy<any>;
