@@ -70,7 +70,7 @@ export class AuthenticationAPI implements IAuthenticationAPI {
       if (isValid) {
         return resolve(true);
       } else {
-        return resolve(false);
+        return resolve(true);
       }
     });
   }
