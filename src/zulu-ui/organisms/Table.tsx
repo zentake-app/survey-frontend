@@ -13,11 +13,10 @@ export interface ZuluTableProps<T> {
   items: T[];
   headers: ZuluTableHeader<T>[];
   arialabel: string;
-  rowProps?: ZuluTableRowProps;
+  getRowProps?: (item: T) => TableRowProps;
 }
 
-export interface ZuluTableRowProps
-  extends React.HTMLAttributes<HTMLTableRowElement> {}
+export interface ZuluTableRowProps extends TableRowProps {}
 
 export interface ZuluTableHeader<T> {
   display: string | React.ReactNode;
@@ -38,7 +37,7 @@ function ZuluTable<T>(props: ZuluTableProps<T>) {
       <TableBody>
         {props.items.map(rowItem => {
           return (
-            <TableRow {...props.rowProps}>
+            <TableRow {...(props.getRowProps && props.getRowProps(rowItem))}>
               {props.headers.map(headerItem => (
                 <TableCell>
                   {headerItem.render

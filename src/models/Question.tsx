@@ -2,7 +2,7 @@ import faker from "faker";
 
 import { ResponseStrategy } from "./ResponseStrategy";
 
-import { QuestionType, QuestionSubtype } from "./QuestionType";
+import { QuestionType, QuestionSubtype, QUESTION_TYPES } from "./QuestionType";
 import { responseStrategyBuilder } from "./ResponseStrategy/responseBuilder";
 
 export type QuestionArgs<T> = {
@@ -17,7 +17,9 @@ export class Question<T> {
     return this.responseStrategy?.getResponse() || null;
   }
   public static fromRandom = (
-    type: QuestionType = "multipleChoice",
+    type: QuestionType = Object.keys(QUESTION_TYPES)[
+      Math.round(Object.keys(QUESTION_TYPES).length * Math.random())
+    ] as QuestionType,
     subType: QuestionSubtype = "horizontalList"
   ) => {
     let responseStrategy: ResponseStrategy<any> = responseStrategyBuilder(type);

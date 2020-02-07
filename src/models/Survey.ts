@@ -1,14 +1,13 @@
 import faker from "faker";
 import { Team } from "./Team";
 import moment from "moment";
-import { Question } from "./Question";
-import { QuestionGroup } from "./QuestionGroup";
+import { SurveyPage } from "./SurveyPage";
 
 interface ISurvey {
   id: string;
   team: Team;
   name: string;
-  questionGroups: QuestionGroup[];
+  surveyPages: SurveyPage[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -17,33 +16,24 @@ export class Survey implements ISurvey {
   id: string;
   team: Team;
   name: string;
-  questionGroups: QuestionGroup[];
+  surveyPages: SurveyPage[];
   createdAt: Date;
   updatedAt: Date;
-  constructor({
-    id,
-    team,
-    name,
-    createdAt,
-    updatedAt,
-    questionGroups
-  }: ISurvey) {
+  constructor({ id, team, name, createdAt, updatedAt, surveyPages }: ISurvey) {
     this.id = id;
-    this.questionGroups = questionGroups;
+    this.surveyPages = surveyPages;
     this.team = team;
     this.name = name;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
   }
 
-  public static fromRandom(questionGroups = 5) {
+  public static fromRandom(surveyPageAmount = 5) {
     return new Survey({
       id: faker.random.uuid(),
-      questionGroups: Array.apply(
-        new Array(questionGroups).map<QuestionGroup>(q =>
-          QuestionGroup.fromRandom()
-        )
-      ) as QuestionGroup[],
+      surveyPages: new Array(surveyPageAmount)
+        .fill(null)
+        .map(_ => SurveyPage.fromRandom()),
       team: Team.fromRandom(),
       name: faker.company.bs(),
       createdAt: faker.date.recent(),
@@ -56,7 +46,7 @@ export class Survey implements ISurvey {
       id: map["id"],
       team: map["team"],
       name: map["name"],
-      questionGroups: map["questionGroups"],
+      surveyPages: map["surveyPages"],
       createdAt: moment(map["createdAt"]).toDate(),
       updatedAt: moment(map["updatedAt"]).toDate()
     });

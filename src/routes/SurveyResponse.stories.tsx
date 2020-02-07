@@ -11,7 +11,7 @@ export default {
 export const main = () => {
   return (
     <UnauthenticatedTemplate>
-      <SurveyResponse survey={Survey.fromRandom()} />
+      <SurveyResponse survey={Survey.fromRandom()} match={{params: {surveyId: 'aaaaaa'}}} />
     </UnauthenticatedTemplate>
   );
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Typography } from "@material-ui/core";
+import { Grid, Typography, TableRowProps } from "@material-ui/core";
 import { RouteComponentProps } from "react-router";
 import { MainTemplate } from "../zulu-ui/templates/Main";
 import NavigationItems from "./common/NavigationItems";
@@ -7,6 +7,7 @@ import { ZuluTable, ZuluTableHeader } from "../zulu-ui/organisms/Table";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { Survey } from "../models/Survey";
+import { Link } from "react-router-dom";
 
 export interface DashboardProps extends Partial<RouteComponentProps> {}
 
@@ -50,6 +51,12 @@ const Dashboard = (args: DashboardProps) => {
             Available Surveys
           </Typography>
           <ZuluTable
+            getRowProps={item => {
+              return ({
+                component: Link,
+                to: `/surveys/respond/${item.id}`
+              } as any) as TableRowProps;
+            }}
             arialabel="Available Surveys"
             headers={availableSurveysHeaders}
             items={
