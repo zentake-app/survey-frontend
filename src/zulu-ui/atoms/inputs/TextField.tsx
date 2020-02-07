@@ -12,7 +12,7 @@ export interface ZuluTextFieldProps {
   fullWidth?: boolean;
   name?: string;
   type?: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (newText: string) => void;
 }
 
 export function ZuluTextField({
@@ -21,11 +21,13 @@ export function ZuluTextField({
   value = "",
   helperText = "",
   variant = "standard",
+  onChange = () => {},
   ...props
 }: ZuluTextFieldProps) {
   return (
     <TextField
       placeholder={placeholder}
+      onChange={e => onChange(e.target.value)}
       label={label}
       value={value}
       variant={variant as any}

@@ -5,17 +5,16 @@ export type MultipleChoiceOption = {
 };
 
 export class MultipleChoiceStrategy extends ResponseStrategy<
-  MultipleChoiceOption
+  MultipleChoiceOption[]
 > {
-  responseStrategyName = "multiple_choice";
+  responseStrategyName = "multipleChoice";
   public responseOptions: MultipleChoiceOption[] = [];
-  public response = null;
+  protected response = null;
   constructor(
     responseOptions: MultipleChoiceOption[],
     args: ResponseStrategyArgs
   ) {
     super(args);
-    console.warn("response options", responseOptions);
     this.responseOptions = responseOptions;
   }
 }

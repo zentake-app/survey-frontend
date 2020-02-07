@@ -1,9 +1,9 @@
 import faker from "faker";
 
 import { ResponseStrategy } from "./ResponseStrategy";
-import { MultipleChoiceStrategy } from "./ResponseStrategy/MultipleChoice";
 
 import { QuestionType, QuestionSubtype } from "./QuestionType";
+import { responseStrategyBuilder } from "./ResponseStrategy/responseBuilder";
 
 export type QuestionArgs<T> = {
   responseStrategy: ResponseStrategy<T>;
@@ -14,19 +14,18 @@ export class Question<T> {
   public responseStrategy: ResponseStrategy<T>;
   public questionText: string = "";
   public get response(): T | null {
-    return this.responseStrategy?.response || null;
+    return this.responseStrategy?.getResponse() || null;
   }
   public static fromRandom = (
     type: QuestionType = "multipleChoice",
     subType: QuestionSubtype = "horizontalList"
-  ) =>
-    new Question({
+  ) => {
+    let responseStrategy: ResponseStrategy<any> = responseStrategyBuilder(type);
+    return new Question({
       questionText: faker.lorem.sentence().replace(".", "?"),
-      responseStrategy: new MultipleChoiceStrategy(
-        new Array(4).fill(null).map(_ => ({ value: faker.lorem.words(3) })),
-        {}
-      )
+      responseStrategy
     });
+  };
   constructor(args: QuestionArgs<T>) {
     this.questionText = args.questionText;
     this.responseStrategy = args.responseStrategy;

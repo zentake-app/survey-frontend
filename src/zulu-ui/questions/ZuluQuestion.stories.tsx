@@ -1,5 +1,5 @@
 import * as React from "react";
-import { withKnobs, text } from "@storybook/addon-knobs";
+import { withKnobs } from "@storybook/addon-knobs";
 import { Question } from "../../models/Question";
 import { ZuluQuestion } from "./ZuluQuestion";
 export default {
@@ -8,5 +8,11 @@ export default {
 };
 
 export const question = () => {
-  return <ZuluQuestion question={Question.fromRandom()} />;
+  return (
+    <div>
+      <ZuluQuestion question={Question.fromRandom("multipleChoice")} />
+      <ZuluQuestion question={Question.fromRandom("singleChoice")} />
+      <ZuluQuestion question={Question.fromRandom("text")} />
+    </div>
+  );
 };
