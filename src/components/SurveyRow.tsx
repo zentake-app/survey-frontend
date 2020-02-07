@@ -15,7 +15,8 @@ export function SurveyRow(props: ISurveyPageProps) {
         padding: "0.5rem"
       }}
     >
-      <h3>Survey Row</h3>
+      <h3>{props.surveyRow.title}</h3>
+      <p>{props.surveyRow.text}</p>
       {props.surveyRow.questions.map(question => (
         <ZuluQuestion question={question} />
       ))}

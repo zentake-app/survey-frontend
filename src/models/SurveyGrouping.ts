@@ -1,5 +1,3 @@
-import { SurveySection } from "./SurveySection";
-
 export interface ISurveyGrouping {
   title?: string;
   text?: string;

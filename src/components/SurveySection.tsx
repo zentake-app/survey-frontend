@@ -11,10 +11,12 @@ export function SurveySection(props: ISurveySectionProps) {
     <div
       style={{
         border: "1px solid blue",
-        margin: "1rem"
+        margin: "1rem",
+        padding: "1rem"
       }}
     >
-      <h2>Survey Section</h2>
+      <h2>{props.surveySection.title}</h2>
+      <p>{props.surveySection.text}</p>
       {props.surveySection.rows.map(row => (
         <SurveyRow surveyRow={row} />
       ))}

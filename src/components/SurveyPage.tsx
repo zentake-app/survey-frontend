@@ -11,10 +11,12 @@ export function SurveyPage(props: ISurveyPageProps) {
     <div
       style={{
         margin: "3rem",
-        border: "1px solid grey"
+        border: "1px solid grey",
+        padding: "1rem"
       }}
     >
-      <h1>Survey Page</h1>
+      <h1>{props.surveyPage.title}</h1>
+      <p>{props.surveyPage.text}</p>
       {props.surveyPage.surveySections.map(section => (
         <SurveySection surveySection={section} />
       ))}

@@ -1,5 +1,7 @@
 import React from "react";
-import { Grid, Typography, TableRowProps } from "@material-ui/core";
+import { TableRowProps } from "@material-ui/core/TableRow";
+import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
 import { RouteComponentProps } from "react-router";
 import { MainTemplate } from "../zulu-ui/templates/Main";
 import NavigationItems from "./common/NavigationItems";
