@@ -39,7 +39,7 @@ const availableSurveysHeaders: ZuluTableHeader<Survey>[] = [
 ];
 
 const Dashboard = (args: DashboardProps) => {
-  const { loading, error, data } = useQuery(getSurveys);
+  const { data } = useQuery(getSurveys);
 
   return (
     <MainTemplate

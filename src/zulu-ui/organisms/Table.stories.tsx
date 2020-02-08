@@ -1,5 +1,5 @@
 import * as React from "react";
-import { withKnobs, text } from "@storybook/addon-knobs";
+import { withKnobs } from "@storybook/addon-knobs";
 import { ZuluTable, ZuluTableHeader } from "./Table";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
@@ -9,7 +9,6 @@ export default {
   decorators: [withKnobs]
 };
 
-const items = Array.apply(null, new Array(30)).map(x => Survey.fromRandom());
 const headers: ZuluTableHeader<Survey>[] = [
   {
     display: "Survey Name",
@@ -17,7 +16,7 @@ const headers: ZuluTableHeader<Survey>[] = [
   },
   {
     display: "Updated At",
-    accessor: "updatedAt",
+    accessor: "updatedAt"
   }
 ];
 
@@ -39,7 +38,7 @@ const getTeams = gql`
 `;
 
 const TableFetchingElement = () => {
-  const { loading, error, data } = useQuery(getTeams);
+  const { data } = useQuery(getTeams);
   console.log(data);
   return (
     <ZuluTable

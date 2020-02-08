@@ -1,4 +1,4 @@
-import { ResponseStrategyArgs, ResponseStrategy } from ".";
+import { ResponseStrategy } from ".";
 
 export type TextOption = {
   value: string;

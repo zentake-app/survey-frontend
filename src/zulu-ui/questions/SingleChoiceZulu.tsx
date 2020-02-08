@@ -1,16 +1,10 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 
-import { ZuluResponseField } from "..";
-import { MultipleChoiceStrategy } from "../../models/ResponseStrategy/MultipleChoice";
 import { ZuluRadio } from "../atoms/inputs/Radio";
 import { SingleChoiceStrategy } from "../../models/ResponseStrategy/SingleChoice";
 
 interface ISingleChoiceResponseProps {
   responseStrategy: SingleChoiceStrategy;
-}
-
-interface ISingleChoiceState {
-  selectedAnswerIndex: number | null;
 }
 
 export default function SingleChoiceResponse(

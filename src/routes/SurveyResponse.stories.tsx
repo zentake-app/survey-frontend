@@ -11,7 +11,11 @@ export default {
 export const main = () => {
   return (
     <UnauthenticatedTemplate>
-      <SurveyResponse survey={Survey.fromRandom()} match={{params: {surveyId: 'aaaaaa'}}} />
+      <SurveyResponse
+        survey={Survey.fromRandom()}
+        // @ts-ignore
+        match={{ params: { surveyId: "aaaaaa" } }}
+      />
     </UnauthenticatedTemplate>
   );
 };

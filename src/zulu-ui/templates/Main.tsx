@@ -2,7 +2,6 @@ import React from "react";
 import { makeStyles, useMediaQuery, useTheme } from "@material-ui/core";
 import { ZuluAppBar } from "../molecules/surfaces/AppBar";
 import { ZuluSidebar, ZuluNavigationItem } from "../organisms/Sidebar";
-import { ZuluMainFooter } from "../organisms/Footer";
 import clsx from "clsx";
 import { AppBarBrandImage } from "../../components/AppBarBrandImage";
 

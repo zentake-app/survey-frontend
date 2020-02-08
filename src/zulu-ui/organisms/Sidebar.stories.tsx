@@ -1,5 +1,5 @@
 import * as React from "react";
-import { withKnobs, text } from "@storybook/addon-knobs";
+import { withKnobs } from "@storybook/addon-knobs";
 import { ZuluSidebar, ZuluNavigationItem } from "./Sidebar";
 import AcUnit from "@material-ui/icons/AcUnit";
 import AccessAlarm from "@material-ui/icons/AccessAlarm"

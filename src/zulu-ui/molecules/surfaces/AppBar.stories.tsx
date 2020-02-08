@@ -1,7 +1,6 @@
 import * as React from "react";
 import { withKnobs, text } from "@storybook/addon-knobs";
 import { ZuluAppBar } from "./AppBar";
-import { makeStyles, Theme, createStyles } from "@material-ui/core";
 import { ZuluAvatar } from "../../atoms/display/Avatar";
 export default {
   title: "Zentake Design Language|Molecules/AppBar",

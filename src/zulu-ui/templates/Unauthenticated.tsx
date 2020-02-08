@@ -1,7 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
 import { ZuluAppBar } from "../molecules/surfaces/AppBar";
-import { ZuluNavigationItem } from "../organisms/Sidebar";
 import clsx from "clsx";
 import { AppBarBrandImage } from "../../components/AppBarBrandImage";
 

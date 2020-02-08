@@ -11,7 +11,7 @@ const SurveyResponse = (props: ISurveyResponse) => {
   const _surveyId = (((props as any) as RouteComponentProps).match
     .params as any).surveyId;
 
-  const [surveyId, _] = useState<string>(_surveyId);
+  const [surveyId] = useState<string>(_surveyId);
 
   const [survey, setSurvey] = useState<Survey | null>(null);
 
