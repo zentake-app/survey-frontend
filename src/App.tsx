@@ -2,7 +2,7 @@ import React from "react";
 import { ZuluThemeProvider } from "./zulu-ui/theme/ThemeProvider";
 import { Router } from "react-router-dom";
 import { createBrowserHistory } from "history";
-import { Routes } from "./Routes";
+import { Routes } from "./routes";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { zuluApolloClient } from "./repositories/common/graphql/apolloClient";
 

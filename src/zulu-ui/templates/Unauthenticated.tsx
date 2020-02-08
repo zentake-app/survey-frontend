@@ -1,7 +1,6 @@
 import React from "react";
-import { makeStyles, useMediaQuery, useTheme } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import { ZuluAppBar } from "../molecules/surfaces/AppBar";
-import { ZuluSidebar, ZuluNavigationItem } from "../organisms/Sidebar";
 import clsx from "clsx";
 import { AppBarBrandImage } from "../../components/AppBarBrandImage";
 
@@ -13,49 +12,39 @@ const useStyles = makeStyles(theme => ({
       paddingTop: 64
     }
   },
-  shiftContent: {
-    paddingLeft: 240
-  },
   content: {
-    height: "100%"
+    height: "100%",
+    padding: "0 2rem"
   }
 }));
 
-interface MainTemplateProps {
-  navigationItems: ZuluNavigationItem[];
+interface UnauthenticatedTemplateProps {
   title?: string;
+  navbarColor?: string;
   brandImageSource?: string;
   children: React.ReactNode;
 }
 
-const MainTemplate = ({
-  navigationItems,
+const UnauthenticatedTemplate = ({
   children,
   title,
   brandImageSource
-}: MainTemplateProps) => {
+}: UnauthenticatedTemplateProps) => {
   const classes = useStyles();
-  const theme = useTheme();
-  const isDesktop = useMediaQuery(theme.breakpoints.up("lg"), {
-    defaultMatches: true
-  });
-  // const [openSidebar, setOpenSidebar] = useState(false);
 
   return (
     <div
       className={clsx({
-        [classes.root]: true,
-        [classes.shiftContent]: isDesktop
+        [classes.root]: true
       })}
     >
       <ZuluAppBar
         pageTitle={title}
         leading={<AppBarBrandImage source={brandImageSource} />}
       />
-      <ZuluSidebar navigationItems={navigationItems} />
       <main className={classes.content}>{children}</main>
     </div>
   );
 };
 
-export { MainTemplate };
+export { UnauthenticatedTemplate };

@@ -1,6 +1,6 @@
 import auth0 from "auth0-js";
 import settings from "../../config/settings";
-
+import jwt from "jsonwebtoken";
 export interface IAuthenticationAPI {
   logIn: () => void;
   logOut: () => void;
@@ -31,21 +31,47 @@ export class AuthenticationAPI implements IAuthenticationAPI {
     console.log(token);
     this.setToken(token);
   }
+  private async fetchPublicKeys(): Promise<string[]> {
+    return new Promise(async (resolve, reject) => {
+      return resolve([""]);
+      // const client = JwksRsa({
+      //   cache: true,
+      //   jwksUri: "http://zentake-dev.auth0.com/.well-known/jwks.json"
+      // });
+      // client.getSigningKeys((error, keys) => {
+      //   if (error) {
+      //     return reject(error);
+      //   }
+      //   return resolve(keys.map(k => k.getPublicKey()));
+      // });
+    });
+  }
   refreshToken() {}
   async isLoggedIn() {
-    return new Promise<boolean>((resolve, reject) => {
+    return new Promise<boolean>(async (resolve, reject) => {
       const token = AuthenticationAPI.getToken();
       if (!token) {
         return resolve(false);
+      }
+      const signingKeys = await this.fetchPublicKeys();
+      const isValid = signingKeys.reduce<boolean>(
+        (validityState, currentKey: string) => {
+          if (validityState) {
+            return true;
+          }
+          try {
+            return !!jwt.verify(token, currentKey);
+          } catch (e) {
+            return false;
+          }
+        },
+        false
+      );
+      if (isValid) {
+        return resolve(true);
       } else {
         return resolve(true);
       }
-      // this.auth0.checkSession({ prompt: "none" }, (error: any, result: any) => {
-      //   if (!error) {
-      //     return resolve(true);
-      //   }
-      //   return resolve();
-      // });
     });
   }
   public static getToken(): string | null {

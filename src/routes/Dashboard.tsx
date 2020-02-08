@@ -1,12 +1,15 @@
 import React from "react";
-import {} from "@material-ui/core";
+import { TableRowProps } from "@material-ui/core/TableRow";
+import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
 import { RouteComponentProps } from "react-router";
 import { MainTemplate } from "../zulu-ui/templates/Main";
-import navigationItems from "./common/navigationItems";
+import NavigationItems from "./common/NavigationItems";
 import { ZuluTable, ZuluTableHeader } from "../zulu-ui/organisms/Table";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { Survey } from "../models/Survey";
+import { Link } from "react-router-dom";
 
 export interface DashboardProps extends Partial<RouteComponentProps> {}
 
@@ -36,19 +39,46 @@ const availableSurveysHeaders: ZuluTableHeader<Survey>[] = [
 ];
 
 const Dashboard = (args: DashboardProps) => {
-  const { loading, error, data } = useQuery(getSurveys);
+  const { data } = useQuery(getSurveys);
 
   return (
-    <MainTemplate title="Dashboard" navigationItems={navigationItems} {...args}>
-      <ZuluTable
-        arialabel="Available Surveys"
-        headers={availableSurveysHeaders}
-        items={
-          (data?.allSurveys?.results as [])?.map(survey =>
-            Survey.fromNetwork(survey)
-          ) || []
-        }
-      />
+    <MainTemplate
+      title="Dashboard"
+      navigationItems={NavigationItems.forUser({})}
+      {...args}
+    >
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <Typography component="h1" variant="h5">
+            Available Surveys
+          </Typography>
+          <ZuluTable
+            getRowProps={item => {
+              return ({
+                component: Link,
+                to: `/surveys/respond/${item.id}`
+              } as any) as TableRowProps;
+            }}
+            arialabel="Available Surveys"
+            headers={availableSurveysHeaders}
+            items={
+              (data?.allSurveys?.results as [])?.map(survey =>
+                Survey.fromNetwork(survey)
+              ) || []
+            }
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <Typography component="h1" variant="h5">
+            Pending Surveys
+          </Typography>
+          <ZuluTable
+            arialabel="Pending Surveys"
+            headers={availableSurveysHeaders}
+            items={[]}
+          />
+        </Grid>
+      </Grid>
     </MainTemplate>
   );
 };

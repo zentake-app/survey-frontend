@@ -7,16 +7,21 @@ export interface ZuluCheckboxProps {
   checked: boolean;
   required?: boolean;
   color?: ZuluColorNames;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (newValue: boolean) => void;
   label?: string;
 }
 
-const ZuluCheckbox = ({ label, ...rest }: ZuluCheckboxProps) => {
+const ZuluCheckbox = ({ label, onChange, ...rest }: ZuluCheckboxProps) => {
   if (label) {
     return (
       <ZuluFormControlLabel
         label={label}
-        control={<Checkbox {...rest} />}
+        control={
+          <Checkbox
+            {...rest}
+            onChange={event => onChange(event.target.checked)}
+          />
+        }
       ></ZuluFormControlLabel>
     );
   }

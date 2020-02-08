@@ -12,6 +12,7 @@
     "@types/faker": "^4.1.8",
     "@types/history": "^4.7.3",
     "@types/jest": "24.0.23",
+    "@types/jsonwebtoken": "^8.3.7",
     "@types/moment": "^2.13.0",
     "@types/node": "12.12.14",
     "@types/query-string": "^6.3.0",
@@ -37,7 +38,7 @@
     "typescript": "3.7.2"
   },
   "scripts": {
-    "build-storybook": "build-storybook -c .storybook",
+    "build-storybook": "build-storybook -c .storybook --quiet",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

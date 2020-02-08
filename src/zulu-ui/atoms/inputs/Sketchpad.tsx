@@ -27,7 +27,7 @@ class Sketchpad extends React.Component<SketchpadProps, SketchpadState> {
       | React.TouchEvent<SVGSVGElement>,
   ) => {
     mouseEvent.preventDefault()
-    if ('button' in mouseEvent && mouseEvent.button != 0) {
+    if ('button' in mouseEvent && mouseEvent.button !== 0) {
 
       return;
     }
@@ -134,30 +134,6 @@ class Sketchpad extends React.Component<SketchpadProps, SketchpadState> {
   }
 }
 
-const Drawing = ({
-  lines,
-  strokeColor,
-  strokeWidth,
-  children,
-}: {
-  lines: Point[][];
-  strokeColor: string;
-  strokeWidth: number;
-  children: React.ReactNode;
-}) => {
-  return (
-    <svg>
-      {lines.map((line, index) => (
-        <DrawingLine
-          color={strokeColor}
-          line={line}
-          strokeWidth={strokeWidth}
-          key={index}
-        />
-      ))}
-    </svg>
-  );
-};
 
 const DrawingLine = ({
   line,

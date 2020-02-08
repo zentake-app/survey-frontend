@@ -1,12 +1,19 @@
-class Survey {}
-class Question {}
+import faker from "faker";
+import { Question } from "./Question";
 export class QuestionGroup {
   constructor(
-    public createdAt: string,
-    public updatedAt: string,
-    public survey: Survey,
-    public questionGroup: QuestionGroup | undefined,
-    public position: number | undefined,
-    public children: Question | QuestionGroup,
-  ){}
+    public createdAt: Date,
+    public updatedAt: Date,
+    public children: Question<any>[] | QuestionGroup[]
+  ) {}
+
+  public static fromRandom() {
+    return new QuestionGroup(
+      faker.date.past(),
+      faker.date.past(),
+      Array.apply(new Array(10).map(_ => Question.fromRandom())) as Question<
+        any
+      >[]
+    );
+  }
 }
